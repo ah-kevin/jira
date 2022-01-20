@@ -1,6 +1,7 @@
 import React from "react";
+import { SearchPanelProps } from "../../model";
 
-export const SearchPanel = ({ users, param, setParam }) => {
+export const SearchPanel = ({ users, param, setParam }: SearchPanelProps) => {
   return (
     <form>
       <div>

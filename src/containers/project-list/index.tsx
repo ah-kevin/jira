@@ -3,7 +3,7 @@ import { List } from "../../component/list";
 import { SearchPanel } from "../../component/search-panel";
 import { useEffect, useState } from "react";
 import qs from "qs";
-import { cleanObject } from "../../utils";
+import { cleanObject, useDebounce, useMount } from "../../utils";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectList = () => {
@@ -13,23 +13,25 @@ export const ProjectList = () => {
     name: "",
     personId: "",
   });
+
+  const debouncedParam = useDebounce(param, 500);
   const [list, setList] = useState([]);
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(cleanObject(param))}`).then(
-      async (response) => {
-        if (response.ok) {
-          setList(await response.json());
-        }
+    fetch(
+      `${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`
+    ).then(async (response) => {
+      if (response.ok) {
+        setList(await response.json());
       }
-    );
-  }, [param]);
-  useEffect(() => {
+    });
+  }, [debouncedParam]);
+  useMount(() => {
     fetch(`${apiUrl}/users`).then(async (response) => {
       if (response.ok) {
         setUsers(await response.json());
       }
     });
-  }, []);
+  });
   return (
     <div>
       <List list={list} users={users} />
