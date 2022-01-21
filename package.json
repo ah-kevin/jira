@@ -18,8 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prepare": "husky install",
-    "serve": "json-server --watch __mock__/db.json --port 3001 --middlewares __mock__/middleware.js"
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -52,9 +51,13 @@
     "husky": ">=6",
     "json-server": "^0.17.0",
     "lint-staged": ">=10",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "jira-dev-tool": "^1.7.61"
   },
   "lint-staged": {
     "*.{js,css,md,tsx,ts}": "prettier --write"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
