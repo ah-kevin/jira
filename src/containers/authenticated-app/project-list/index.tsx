@@ -1,10 +1,11 @@
 import React from "react";
-import { List } from "../../component/list";
-import { SearchPanel } from "../../component/search-panel";
+import { List } from "../../../component/list";
+import { SearchPanel } from "../../../component/search-panel";
 import { useEffect, useState } from "react";
 import qs from "qs";
-import { cleanObject, useDebounce, useMount } from "../../utils";
-import { apiUrl } from "../../utils/constant";
+import { cleanObject, useDebounce, useMount } from "../../../utils";
+import { apiUrl } from "../../../utils/constant";
+import { useHttp } from "../../../utils/http";
 
 export const ProjectList = () => {
   const [users, setUsers] = useState([]);
@@ -16,21 +17,12 @@ export const ProjectList = () => {
 
   const debouncedParam = useDebounce(param, 500);
   const [list, setList] = useState([]);
+  const client = useHttp();
   useEffect(() => {
-    fetch(
-      `${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`
-    ).then(async (response) => {
-      if (response.ok) {
-        setList(await response.json());
-      }
-    });
+    client("projects", cleanObject(debouncedParam)).then(setList);
   }, [debouncedParam]);
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUsers(await response.json());
-      }
-    });
+    client("users").then(setUsers);
   });
   return (
     <div>

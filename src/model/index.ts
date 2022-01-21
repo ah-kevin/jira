@@ -4,6 +4,7 @@ export interface User {
   email: string;
   title: string;
   organization: string;
+  token: string;
 }
 
 export interface SearchPanelProps {
@@ -34,4 +35,9 @@ export interface Base {
 
 export interface Person extends Base {
   name: string;
+}
+
+export interface AuthForm {
+  username: string;
+  password: string;
 }
