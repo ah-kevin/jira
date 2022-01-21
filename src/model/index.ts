@@ -14,6 +14,7 @@ export interface SearchPanelProps {
   };
   setParam: (param: SearchPanelProps["param"]) => void;
 }
+
 export interface Project {
   id: number;
   name: string;
@@ -25,4 +26,12 @@ export interface Project {
 export interface ListProps {
   users: User[];
   list: Project[];
+}
+
+export interface Base {
+  id: number;
+}
+
+export interface Person extends Base {
+  name: string;
 }

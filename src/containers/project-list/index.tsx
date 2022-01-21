@@ -4,8 +4,8 @@ import { SearchPanel } from "../../component/search-panel";
 import { useEffect, useState } from "react";
 import qs from "qs";
 import { cleanObject, useDebounce, useMount } from "../../utils";
+import { apiUrl } from "../../utils/constant";
 
-const apiUrl = process.env.REACT_APP_API_URL;
 export const ProjectList = () => {
   const [users, setUsers] = useState([]);
 

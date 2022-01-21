@@ -1,4 +1,3 @@
-import React from "react";
 import { ListProps } from "../../model";
 
 export const List = ({ list, users }: ListProps) => {
